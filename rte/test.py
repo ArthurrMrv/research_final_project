@@ -756,4 +756,8 @@ if __name__ == "__main__":
                 
         except Exception as e:
             print(f"Error creating visualizations: {e}")
+    except Exception as e:
+            print(f"Error: {e}")
+    
+    
 
