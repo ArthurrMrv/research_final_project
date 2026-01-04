@@ -1,11 +1,5 @@
 # dashboard.py
 """
-SNCF & RTE Energy Analysis - Streamlit App (LOCAL DATA ONLY)
-✅ Uses your parquet files in ./data/sncf and ./data/rte (no API credentials)
-✅ Robust column detection + lets the user choose columns if detection is unsure
-✅ Meaningful visuals for an annual report (2023): totals, monthly/weekly/hourly patterns, mix shares
-✅ Keeps the "Macro → Sector → Micro → Comparison → RTE" structure from your original file
-
 Run:
   streamlit run dashboard.py
 """
