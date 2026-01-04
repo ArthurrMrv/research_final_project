@@ -2,6 +2,12 @@
 
 Interactive Streamlit application for analyzing SNCF greenhouse gas emissions, CO2 data, and RTE energy consumption/production data with granular analysis from macro to micro levels.
 
+## Driving Question Asked by Our Client
+
+**How much could we reduce SNCF's carbon footprint and energy costs if we could time-shift certain operations to coincide with surplus renewable energy on the French grid?**
+
+-> This question actually asks us to understand how SNCF can optimize its rail transport system in real-time to reduce emissions and energy costs, by dynamically aligning train operations with the cleanest and cheapest available energy on the RTE grid. We therefore created the following features.
+
 ## Features
 
 ### 📊 Macro Overview
@@ -100,3 +106,6 @@ The application uses data from the `data/` folder:
 - **Flexible Data Handling**: Automatically detects date columns, numeric columns, and categorical columns
 - **Real-time Filtering**: Use sidebar and dropdowns to filter and explore data
 - **Multi-format Support**: Handles Parquet (SNCF) and Excel (RTE) data formats
+
+## Conclusion from our Data Consultants
+

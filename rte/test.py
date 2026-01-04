@@ -593,17 +593,75 @@ def plot_renewable_vs_nonrenewable(data: Dict[str, Any], save_path: Optional[str
 if __name__ == "__main__":
     dotenv.load_dotenv()
 
-    client_id = os.getenv("RTE_CLIENT")
-    client_secret = os.getenv("RTE_SECRET")
+    # Example 1: Get capacities per production type (no date range)
+    print("=== Example 1: Capacities per Production Type ===")
+    try:
+        data1 = rte.get_capacities_per_production_type()
+        print(data1)
+    except Exception as e:
+        print(f"Error: {e}")
 
-    if not client_id or not client_secret:
-        print("Warning: RTE_CLIENT and RTE_SECRET not found in .env file. API calls will be skipped.")
-        print("Using local data instead if available.")
-    else:
-        rte = RTEAPI(client_id, client_secret)
+    print("\n" + "="*50 + "\n")
 
-        # Example 1: Get capacities per production type (no date range)
-        print("=== Example 1: Capacities per Production Type ===")
+    # Example 2: Get capacities per production type with date range
+    print("=== Example 2: Capacities per Production Type (with date range) ===")
+    try:
+        # Get data for a specific period (e.g., last 30 days)
+        # Note: API requires ISO 8601 format with timezone (e.g., '2023-02-01T00:00:00+01:00')
+        # For France, timezone is typically +01:00 (CET) or +02:00 (CEST)
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=30)
+        
+        # Format with timezone (using +01:00 for CET, adjust as needed)
+        start_str = start_date.strftime("%Y-%m-%dT00:00:00+01:00")
+        end_str = end_date.strftime("%Y-%m-%dT00:00:00+01:00")
+        
+        data2 = rte.get_capacities_per_production_type(
+            start_date=start_str,
+            end_date=end_str
+        )
+        print(data2)
+    except Exception as e:
+        print(f"Error: {e}")
+
+    print("\n" + "="*50 + "\n")
+
+    # Example 3: Get capacities per production unit
+    print("=== Example 3: Capacities per Production Unit ===")
+    try:
+        data3 = rte.get_capacities_per_production_unit()
+        print(data3)
+    except Exception as e:
+        print(f"Error: {e}")
+
+    print("\n" + "="*50 + "\n")
+
+    # Example 4: Get CPC capacities
+    print("=== Example 4: CPC Capacities ===")
+    try:
+        data4 = rte.get_capacities_cpc()
+        print(data4)
+    except Exception as e:
+        print(f"Error: {e}")
+
+    print("\n" + "="*50 + "\n")
+
+    # Example 5: Visualizations
+    print("=== Example 5: Creating Visualizations ===")
+    try:
+        # Get data for visualization
+        viz_data = rte.get_capacities_per_production_type()
+        # print(viz_data.type())
+        
+        # Plot 1: Capacities per production type
+        print("Creating production type visualization...")
+        plot_capacities_per_production_type(viz_data, save_path="capacities_by_type.png", show=True)
+        
+        # Plot 2: Renewable vs Non-renewable
+        print("Creating renewable vs non-renewable comparison...")
+        plot_renewable_vs_nonrenewable(viz_data, save_path="renewable_comparison.png", show=True)
+        
+        # Plot 3: Production units (if available)
         try:
             data1 = rte.get_capacities_per_production_type()
             print(data1)
