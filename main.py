@@ -2,9 +2,6 @@
 SNCF & RTE Data Visualization - Streamlit App
 Interactive visualizations for SNCF greenhouse gas emissions, CO2 data, and RTE energy data
 with granular analysis from macro to micro levels.
-
-This version keeps your structure but makes the visualizations robust + meaningful even when
-SNCF data is mostly "annual report" style (no real time series), and when columns vary.
 """
 
 import streamlit as st

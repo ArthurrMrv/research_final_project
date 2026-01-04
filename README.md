@@ -65,7 +65,7 @@ pip install -e .
 Run the Streamlit app:
 
 ```bash
-streamlit run dashboard.py
+streamlit run main.py
 ```
 
 Or use the provided script:
