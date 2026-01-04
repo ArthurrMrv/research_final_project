@@ -60,6 +60,12 @@ Or using the project configuration:
 pip install -e .
 ```
 
+2. Set up your RTE API credentials in the .env file
+```
+RTE_CLIENT=
+RTE_SECRET=
+```
+
 ## Usage
 
 Run the Streamlit app:

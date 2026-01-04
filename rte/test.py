@@ -660,6 +660,7 @@ if __name__ == "__main__":
     try:
         # Get data for visualization
         viz_data = rte.get_capacities_per_production_type()
+        # print(viz_data.type())
         
         # Plot 1: Capacities per production type
         print("Creating production type visualization...")
