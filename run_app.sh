@@ -1,5 +1,5 @@
 #!/bin/bash
 # Script to run the SNCF Streamlit app
 
-streamlit run dasboard.py
+streamlit run dashboard.py
 
