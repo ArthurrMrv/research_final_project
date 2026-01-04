@@ -426,6 +426,14 @@ def create_sector_analysis(df: pd.DataFrame, df_name="Emissions"):
         st.info(f"No categorical or numeric columns found for sector analysis in {df_name} data.")
         return None, None, None
 
+    # Exclude 'annee' and 'siren' columns from selectable options
+    exclude_cols = ['annee', 'siren', 'Annee', 'Siren', 'ANNEE', 'SIREN']
+    categorical_cols = [col for col in categorical_cols if col not in exclude_cols]
+
+    if not categorical_cols:
+        st.info(f"No suitable categorical columns found for sector analysis (excluding annee/siren).")
+        return None, None, None
+
     # Prefer a good default (but keep your selectboxes)
     default_sector = pick_best_category(df, categorical_cols) or categorical_cols[0]
     default_value = pick_best_numeric(df, numeric_cols) or numeric_cols[0]
@@ -564,6 +572,10 @@ def create_micro_analysis(df: pd.DataFrame, sector_col: str, sector_summary: pd.
 
     all_categorical = detect_categorical_columns(sector_data)
     other_categorical = [col for col in all_categorical if col != sector_col]
+    
+    # Exclude 'annee' and 'siren' columns from sub-category selection
+    exclude_cols = ['annee', 'siren', 'Annee', 'Siren', 'ANNEE', 'SIREN']
+    other_categorical = [col for col in other_categorical if col not in exclude_cols]
 
     if other_categorical and value_col in sector_data.columns:
         subcategory_col = st.selectbox(
@@ -1574,7 +1586,7 @@ def main():
             st.write("**RTE Production columns:**", list(rte_production_df.columns))
 
     # Navigation
-    analysis_options = ["Macro Overview", "Sector Analysis", "Micro Analysis", "Comparison"]
+    analysis_options = ["Macro Overview", "Sector Analysis", "Micro Analysis"]
     if rte_consumption_df is not None or rte_production_df is not None:
         analysis_options += ["RTE Energy Analysis", "Micro RTE Analysis"]
 
@@ -1626,9 +1638,6 @@ def main():
                 create_micro_analysis(co2_df, sector_col, sector_summary, value_col, "CO2 Emissions")
             else:
                 st.info("Please complete Sector Analysis for CO2 Emissions first (and select a value column).")
-
-    elif analysis_level == "Comparison":
-        create_comparison_view(emissions_df, co2_df)
 
     elif analysis_level == "RTE Energy Analysis":
         create_rte_analysis(rte_consumption_df, rte_production_df)
