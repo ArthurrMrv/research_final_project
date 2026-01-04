@@ -65,7 +65,7 @@ pip install -e .
 Run the Streamlit app:
 
 ```bash
-streamlit run sncf.py
+streamlit run dashboard.py
 ```
 
 Or use the provided script:
